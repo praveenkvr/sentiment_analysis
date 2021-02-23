@@ -1,0 +1,8 @@
+.ipynb_checkpoints/
+dataset/
+transformer_weights/
+transformer_weights1/
+src/basic_attention_weights/
+weights_imdb/
+.vscode/
+__pycache__/
