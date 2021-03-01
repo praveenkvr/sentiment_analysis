@@ -8,14 +8,16 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+from models import EMBEDDING_DIMS
+
 tf.config.experimental.list_physical_devices('GPU')
 nltk.download('wordnet')
 
 stp_wrds = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
-EMBEDDING_FILE = os.path.join('..', 'dataset', 'glove', 'glove.6B.300d.txt')
-EMBEDDING_SIZE = 300
+EMBEDDING_FILE = os.path.join(
+    '..', 'dataset', 'glove', f'glove.6B.{EMBEDDING_DIMS}d.txt')
 
 
 def clean_data(text):
@@ -51,7 +53,7 @@ def get_glove_embeddings(file_name):
 
 def build_embeddings(vocab_size, tokenizer):
     match_counter = 0
-    embeddings = np.zeros((vocab_size, EMBEDDING_SIZE))
+    embeddings = np.zeros((vocab_size, EMBEDDING_DIMS))
     emb_map = get_glove_embeddings(EMBEDDING_FILE)
     for word, i in tokenizer.word_index.items():
         if word in emb_map:

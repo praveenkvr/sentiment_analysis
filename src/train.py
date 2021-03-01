@@ -10,15 +10,14 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from sklearn.model_selection import train_test_split
 
 from util import clean_data, process_text, build_embeddings
-from models import build_lstm_with_attention, build_multi_head_attention
+from models import build_lstm_with_attention, build_multi_head_attention, EMBEDDING_DIMS
 
 
 VOCAB_SIZE = 300000
-MAX_LEN = 150
-BUFFER_SIZE = 256
-BATCH_SIZE = 256
-EMBEDDING_SIZE = 300
-EPOCHS = 20
+MAX_LEN = 160
+BUFFER_SIZE = 512
+BATCH_SIZE = 512
+EPOCHS = 25
 
 
 def load_data():
@@ -37,15 +36,13 @@ def process_data(data):
 
     return data
 
-# global dataset
-
 
 # load and process data
 data = load_data()
 data = process_data(data)
 
 # split data
-train, test = train_test_split(data, test_size=0.2)
+train, test = train_test_split(data, test_size=0.1)
 test, val = train_test_split(test, test_size=0.5)
 
 if os.path.exists('tokenizer.pickle'):
@@ -100,11 +97,11 @@ embedding_weights, match_counter = build_embeddings(
 # model = build_multi_head_attention(
 #     embedding_weights, len(tokenizer.word_index)+1, MAX_LEN, input_shape=(MAX_LEN,))
 
-# model = build_lstm_with_attention(
-#     embedding_weights, len(tokenizer.word_index)+1, MAX_LEN, input_shape=(MAX_LEN,))
+model = build_lstm_with_attention(
+    embedding_weights, len(tokenizer.word_index)+1, MAX_LEN, input_shape=(MAX_LEN,))
 
-weights_filenam = 'basic_attention_weights'
-model = tf.keras.models.load_model(weights_filenam)
+weights_filenam = 'basic_attention_weights4'
+#model = tf.keras.models.load_model(weights_filenam)
 model.summary()
 
 
@@ -148,7 +145,7 @@ def train_loop():
         if e % 5 == 0:
             model.save(weights_filenam)
 
-        for k, (X_val, Y_val) in enumerate(val_dataset):
+        for k, (X_val, Y_val) in enumerate(test_dataset):
             val_loss = val_step(X_val, Y_val, model)
 
         print(
@@ -170,5 +167,6 @@ def evaluate():
         test_bce_metric.reset_states()
     print(f"AVERAGE : {sum(acc)/ len(acc)}")
 
-# train_loop()
+
+train_loop()
 evaluate()

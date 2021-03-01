@@ -2,7 +2,13 @@
 dataset/
 transformer_weights/
 transformer_weights1/
-src/basic_attention_weights/
+basic_attention_weights*/
 weights_imdb/
 .vscode/
 __pycache__/
+.myenv
+tokenizer.*
+tokenizer.pickle
+weights*/
+.next
+.env

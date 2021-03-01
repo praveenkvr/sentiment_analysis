@@ -1,6 +1,8 @@
 
 import tensorflow as tf
 
+EMBEDDING_DIMS = 200
+
 
 class MultiHeadAttention(tf.keras.layers.Layer):
 
@@ -100,11 +102,11 @@ class Transformer(tf.keras.layers.Layer):
         return self.layer_norm2(layer_norm1 + ff_output)
 
 
-def build_multi_head_attention(embedding_weights, vocab_size, max_len, input_shape=(120,)):
+def build_multi_head_attention(embedding_weights, vocab_size, max_len, input_shape=(None,)):
     inputs = tf.keras.layers.Input(shape=input_shape)
     x = TokenAndPositionEmbeddings(
-        max_len, 300, vocab_size, embedding_weights)(inputs)
-    x = Transformer(300, num_heads=6, ff_dim=512)(x)
+        max_len, EMBEDDING_DIMS, vocab_size, embedding_weights)(inputs)
+    x = Transformer(EMBEDDING_DIMS, num_heads=4, ff_dim=512)(x)
     x = tf.keras.layers.GlobalAveragePooling1D()(x)
     x = tf.keras.layers.Dropout(0.1, name="drop1")(x)
     x = tf.keras.layers.Dense(32, activation='relu')(x)
@@ -140,14 +142,14 @@ class BasicAttention(tf.keras.layers.Layer):
         return context_vector, attention_weights
 
 
-def build_lstm_with_attention(embedding_weights, vocab_size, max_len, input_shape=(120,)):
+def build_lstm_with_attention(embedding_weights, vocab_size, max_len, input_shape=(None,)):
     """
     Bi-directional LSTM with Attention
     """
     inp = tf.keras.layers.Input(shape=input_shape)
     embedding = tf.keras.layers.Embedding(
         vocab_size,
-        output_dim=300,
+        output_dim=EMBEDDING_DIMS,
         weights=[embedding_weights],
         input_length=max_len
     )(inp)
