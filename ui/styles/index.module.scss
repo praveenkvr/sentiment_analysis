@@ -28,6 +28,16 @@
     padding-bottom: 1rem;
 }
 
+.input-elements {
+    font-size: 1.4rem;
+}
+
+@media screen and (max-width: 700px) {
+    .input-elements {
+        font-size: 1rem;
+    }
+}
+
 .percentage-text-positive {
     font-size: 96px;
     font-weight: bold;

@@ -12,8 +12,8 @@ export default function ListTweet({ tweets }: Porps) {
 
     return (
         <ul className={css['list-container']}>
-            {tweets.map(tweet =>
-                <li key={tweet.result} className={css['list-item']}>{tweet.text}</li>
+            {tweets.map((tweet, index) =>
+                <li key={index} className={css['list-item']}>{tweet.text}</li>
             )}
         </ul>
     )

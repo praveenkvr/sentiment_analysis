@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import Layout from '../components/Layout'
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -48,14 +50,14 @@ const IndexPage = () => {
       <div>
         <h1 className={css['large-text']}>Sentiment Analysis</h1>
       </div>
-      <div>
+      <div className={css['input-elements']}>
         <Input onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target?.value || '')} value={value} onEnter={onClick} />
         <Button onClick={onClick}>{buttonText}</Button>
       </div>
       <div className={css['inputs-spacer']}></div>
       {!isFetching && results &&
         <div className="results">
-          <Grid columns={3}>
+          <Grid>
             <Grid.GridItem><Card header={'Average'}><p className={isPositive ? css['percentage-text-positive'] : css['percentage-text-negative']}>{percentage}</p></Card></Grid.GridItem>
             <Grid.GridItem><Card header={'Top Positive'}><ListTweet tweets={getTopPositiveTweets(results.tweets)} /></Card></Grid.GridItem>
             <Grid.GridItem><Card header={'Top Negative'}><ListTweet tweets={getTopNegativeTweets(results.tweets)} /></Card></Grid.GridItem>

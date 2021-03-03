@@ -26,10 +26,14 @@ def get_tweets_for_query(query, numtweets=100):
     try:
         print(query)
         tweets = tweepy.Cursor(api.search, q=[
-            f"{query} -filter:retweets"], lang="en", tweet_mode='compat').items(numtweets)
+            f"{query} -filter:links AND -filter:retweets AND -filter:media"],
+            exclude_replies=True,
+            include_entities=False,
+            include_rts=False,
+            lang="en", tweet_mode='extended').items(numtweets)
 
-        list_tweets = [tweet.text for tweet in tweets if not tweet.retweeted and (
-            'RT ' not in tweet.text)]
+        list_tweets = [tweet.full_text for tweet in tweets if not tweet.retweeted and (
+            'RT ' not in tweet.full_text)]
         return list_tweets
     except Exception as e:
         print(e)
