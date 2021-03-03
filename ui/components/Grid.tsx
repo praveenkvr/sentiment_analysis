@@ -1,6 +1,6 @@
 import React from 'react';
 import GridItem, { GridItemProps } from './GridItem';
-import css from './grid.module.scss';
+import css from './Grid.module.scss';
 
 type Props = {
     columns?: number;
