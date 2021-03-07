@@ -17,7 +17,8 @@ export default function useFetch(baseUrl: string, options?: RequestInit) {
 
     const fetchData = async () => {
         try {
-            const resp = await fetch(url, options);
+            const encoded = encodeURIComponent(url)
+            const resp = await fetch(encoded, options);
             const data = await resp.json();
             setFetching(false);
             if (data.error) {
