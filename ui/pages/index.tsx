@@ -35,7 +35,7 @@ const IndexPage = () => {
     }
 
     setButtonText('Analyzing...');
-    const url = `${BASE_URL}?q=${value}`;
+    const url = `${BASE_URL}?q=${encodeURIComponent(value)}`;
     doFetch(url);
   }
 
