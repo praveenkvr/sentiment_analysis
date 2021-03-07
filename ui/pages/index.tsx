@@ -55,7 +55,7 @@ const IndexPage = () => {
       {!isFetching && results &&
         <div className="results">
           <Grid>
-            <Grid.GridItem><Card header={'Average'}><p className={isPositive ? css['percentage-text-positive'] : css['percentage-text-negative']}>{percentage}</p></Card></Grid.GridItem>
+            <Grid.GridItem><Card header={'% Positive'}><p className={isPositive ? css['percentage-text-positive'] : css['percentage-text-negative']}>{percentage}</p></Card></Grid.GridItem>
             <Grid.GridItem><Card header={'Top Positive'}><ListTweet tweets={getTopPositiveTweets(results.tweets)} /></Card></Grid.GridItem>
             <Grid.GridItem><Card header={'Top Negative'}><ListTweet tweets={getTopNegativeTweets(results.tweets)} /></Card></Grid.GridItem>
           </Grid>

@@ -16,7 +16,15 @@ const Input = ({ onChange, value, onEnter }: InputProps) => {
     }
 
     return (
-        <input className={css.input} placeholder="Search tweets by text or a hashtag" type="text" name="input" id="input" onChange={onChange} onKeyUp={onKeyUp} value={value} />
+        <>
+            <label className={css['hidden']} htmlFor="inputtext">Query</label>
+            <input
+                className={css.input}
+                id="inputtext"
+                placeholder="Search tweets by text or a hashtag"
+                aria-label="Search tweets by text or a hashtag"
+                type="text" name="input" onChange={onChange} onKeyUp={onKeyUp} value={value} />
+        </>
     )
 };
 

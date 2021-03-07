@@ -13,6 +13,7 @@ export default function useFetch(baseUrl: string, options?: RequestInit) {
             setUrl(updateUrl);
         }
         setFetching(true);
+        setError(false);
     }
 
     const fetchData = async () => {
@@ -28,7 +29,7 @@ export default function useFetch(baseUrl: string, options?: RequestInit) {
         } catch (e) {
             console.log(e.stack);
             setFetching(false);
-            setError(true)
+            setError(true);
         }
 
     };
