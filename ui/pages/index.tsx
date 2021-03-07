@@ -61,7 +61,7 @@ const IndexPage = () => {
           </Grid>
         </div>
       }
-      {error &&
+      {error && !isFetching &&
         <div className="error">{"Failed to get data"}</div>
       }
     </Layout>

@@ -12,3 +12,4 @@ tokenizer.pickle
 weights*/
 .next
 .env
+server.log
