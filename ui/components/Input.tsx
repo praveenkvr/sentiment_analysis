@@ -16,7 +16,7 @@ const Input = ({ onChange, value, onEnter }: InputProps) => {
     }
 
     return (
-        <input className={css.input} placeholder="Enter text or a hashtag" type="text" name="input" id="input" onChange={onChange} onKeyUp={onKeyUp} value={value} />
+        <input className={css.input} placeholder="Search tweets by text or a hashtag" type="text" name="input" id="input" onChange={onChange} onKeyUp={onKeyUp} value={value} />
     )
 };
 
