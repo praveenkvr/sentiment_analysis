@@ -12,7 +12,7 @@ import { processResults, getTopPositiveTweets, getTopNegativeTweets } from '../l
 
 import css from '../styles/index.module.scss';
 
-const BASE_URL = 'http://localhost:5000/searchandanalyze';
+const BASE_URL = `/searchandanalyze`;
 
 const IndexPage = () => {
 
