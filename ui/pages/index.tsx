@@ -35,10 +35,8 @@ const IndexPage = () => {
     }
 
     setButtonText('Analyzing...');
-    const url = new URL(BASE_URL);
-    const params = { q: value }
-    Object.keys(params).forEach(key => url.searchParams.append(key, value))
-    doFetch(url.toString());
+    const url = `${BASE_URL}?q=${value}`;
+    doFetch(url);
   }
 
   const results = processResults(data);
